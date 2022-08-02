@@ -13,15 +13,22 @@ class TechnicianDetailEncoder(ModelEncoder):
         "employee_number",
     ]
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET", "POST"])
 def api_create_technician(request):
-    content = json.loads(request.body)
-    technician = Technician.objects.create(**content)
-    return JsonResponse(
-        technician,
-        encoder = TechnicianDetailEncoder,
-        safe = False,
-    )
+    if request.method == "GET":
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {"technicians": technicians},
+            encoder=TechnicianDetailEncoder
+        )
+    else: #POST
+        content = json.loads(request.body)
+        technician = Technician.objects.create(**content)
+        return JsonResponse(
+            technician,
+            encoder = TechnicianDetailEncoder,
+            safe = False,
+        )
 
 # @require_http_methods(["GET", "POST"])
 # def api_list_hats(request, automobile_vo_id=None):
