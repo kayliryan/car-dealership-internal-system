@@ -32,7 +32,6 @@ class ListAutomobiles extends React.Component {
     render () {
       return (
         <table className="table table-striped table-hover table-bordered">
-        <caption>Vehicle Models</caption>
         <thead className="table-dark">
           <tr>
             <th>VIN</th>
