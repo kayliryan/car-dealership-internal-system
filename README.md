@@ -3,7 +3,7 @@
 Team:
 
 * Kayli Ryan - Services
-* Person 2 - Which microservice?
+* Jonathan Chen - Sales
 
 ## Design
 

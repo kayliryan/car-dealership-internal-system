@@ -7,11 +7,13 @@ import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelList from './VehicleModelList';
 import AutomobileForm from './AutomobileForm';
-
+import CreateCustomer from './CreateCustomer';
+import CreateSalesPerson from './CreateSalesPerson';
+import SalesRecordListAll from './SalesRecordList';
 function App(props) {
-  if (props.manufacturers !== undefined) {
-    return null;
-  }
+  // if (props.manufacturers !== undefined) {
+  //   return null;
+  // }
   return (
     <BrowserRouter>
       <Nav />
@@ -24,6 +26,9 @@ function App(props) {
           <Route path="/manufacturers/create" element={<ManufacturerForm />} />
           <Route path="/models" element={<VehicleModelList />} />
           <Route path="/automobiles/create" element={<AutomobileForm />} />
+          <Route path="/customers/create" element={<CreateCustomer />} />
+          <Route path="/salesperson/create" element={<CreateSalesPerson />} />
+          <Route path="/salesrecord" element={<SalesRecordListAll />} />
         </Routes>
       </div>
     </BrowserRouter>

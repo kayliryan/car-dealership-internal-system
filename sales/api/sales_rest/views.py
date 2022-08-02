@@ -23,7 +23,27 @@ class SalesPersonEncoder(ModelEncoder):
         "id"
     ]
 
+class AutomobileVOEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = [
+        "vin", 
+        "sold"
+    ]
 
+class SalesRecordEncoder(ModelEncoder):
+    model = SalesRecord
+    properties = [
+        "saleperson",
+        "price",
+        "customer",
+        "automobile",
+        "id"
+    ]
+    encoders = {
+        "saleperson": SalesPersonEncoder(),
+        "customer": CustomerEncoder(),
+        "automobile": AutomobileVOEncoder()
+    }
 #list customers / create Customer
     #get/post
 @require_http_methods(["GET", "POST"])
@@ -54,14 +74,62 @@ def api_list_customer(request):
 @require_http_methods(["GET","POST"])
 def api_salesperson(request):
     if request.method=="GET":
-        salesperson = SalesPerson.objects.all()
+        saleperson = SalesPerson.objects.all()
         return JsonResponse(
-            {"Salesperson": salesperson},
+            {"saleperson": saleperson},
             encoder=SalesPersonEncoder
         )
     else:
         content = json.loads(request.body)
-        try:
+        salesperson = SalesPerson.objects.create(**content)
+        return JsonResponse(
+            salesperson,
+            encoder=SalesPersonEncoder,
+            safe=False,
+        )
+
 #list salesperson sales history
+@require_http_methods(["GET", "POST"])
+def api_list_sales_record(request, salesperson_vo_id=None):
+    if request.method=="GET":
+        if salesperson_vo_id is not None:
+            salesrecord = SalesRecord.objects.filter(saleperson=salesperson_vo_id)
+        else:
+            salesrecord = SalesRecord.objects.all()
+        return JsonResponse(
+            {"salesrecord": salesrecord},
+            encoder = SalesRecordEncoder
+        )
+    else: #POST create sales record
+        content = json.loads(request.body)
+        print(content)
+        try:
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            if automobile.sold == True:
+                return JsonResponse({
+                    "message": "Sorry this car is already sold"
+                }, status = 400,)
+            else:
+                content["automobile"] = automobile
+                saleperson = SalesPerson.objects.get(id=content["saleperson"])
+                content["saleperson"] = saleperson
+                customer = Customer.objects.get(id=content["customer"])
+                content["customer"] = customer
+                print(content)
+                salerecord = SalesRecord.objects.create(**content)
+                automobile.sold = True
+                automobile.save()
+
+                return JsonResponse(
+                    salerecord,
+                    encoder=SalesRecordEncoder,
+                    safe=False,
+                )
+
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invaid automobile id"},
+                status=400.
+            )
 
 #List all Sales
