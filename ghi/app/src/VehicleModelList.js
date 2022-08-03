@@ -31,6 +31,7 @@ class VehicleModelList extends React.Component {
 
         return (
         <React.Fragment>
+        <p className="h1 mt-3 mb-3">Vehicle Models</p>
         <div className="container-fluid">
         </div>
         <table className="table table-striped">
