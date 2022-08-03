@@ -18,7 +18,7 @@ class Appointment(models.Model):
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="appointments",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     owner = models.CharField(max_length=100)
     date = models.DateField()
@@ -26,6 +26,6 @@ class Appointment(models.Model):
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     reason = models.CharField(max_length=200)

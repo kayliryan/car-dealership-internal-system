@@ -31,7 +31,7 @@ class AppointmentList extends React.Component {
     }
 
     async deleteAppointment(appt) {
-        await fetch(`http://localhost:8080/api/appointments/${appt.id}/`, { method: 'DELETE' });
+        await fetch(`http://localhost:8080/api/appointments/${appt.id}/`, { method: "DELETE" });
         let index = this.state.appointments.indexOf(appt);
         let updated_appts = [...this.state.appointments];
         updated_appts.splice(index,1)
@@ -53,7 +53,6 @@ class AppointmentList extends React.Component {
             </tr>
             </thead>
             <tbody>
-                console.log(appointments)
             {this.state.appointments.map(appt => {
             return (
                 <tr key={appt.id}>

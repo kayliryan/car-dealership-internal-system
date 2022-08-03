@@ -22,6 +22,7 @@ class AppointmentEncoder(ModelEncoder):
         "date",
         "time",
         "reason",
+        "id",
     ]
     def get_extra_data(self, o):
         return {
@@ -89,13 +90,9 @@ def api_list_appointments(request, automobile_vo_vin=None):
                 safe=False,
             )
 
-@require_http_methods(["DELETE", "GET"])
+@require_http_methods(["GET"])
 def api_show_appointment(request, vin):
-    if request.method == "DELETE":
-        auto = AutomobileVO.objects.get(vin=vin)
-        count, _ = Appointment.objects.filter(vin=vin).delete()
-        return JsonResponse({"deleted": count > 0})
-    else: #GET DETAILS
+    if request.method == "GET":
         automobile = AutomobileVO.objects.get(vin=vin)
         appointments = Appointment.objects.filter(automobile=automobile)
         return JsonResponse(
@@ -103,3 +100,9 @@ def api_show_appointment(request, vin):
             encoder = AppointmentEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE"])
+def api_delete_appointment(request, pk):
+    if request.method == "DELETE":
+        count, _ = Appointment.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
