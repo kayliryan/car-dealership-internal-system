@@ -4,20 +4,21 @@ class SalesRecordListAll extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        automobiles: [],
+        salerecord: [],
       }
-      this.getAutomobiles = this.getAutomobiles.bind(this);
+      this.getSaleRecords = this.getSaleRecords.bind(this);
     }
     
     
-    async getAutomobiles() {
+    async getSaleRecords() {
       const url = 'http://localhost:8090/api/salesrecord/';
       try {
         const response = await fetch(url);
         if (response.ok) {
           const data = await response.json()
+          console.log(data)
           this.setState({
-            salesrecord: data.salesrecord,
+            salerecord: data.salesrecord,
           })
         };
       } catch (e) {

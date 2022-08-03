@@ -131,5 +131,3 @@ def api_list_sales_record(request, salesperson_vo_id=None):
                 {"message": "Invaid automobile id"},
                 status=400.
             )
-
-#List all Sales

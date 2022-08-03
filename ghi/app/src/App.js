@@ -10,6 +10,7 @@ import AutomobileForm from './AutomobileForm';
 import CreateCustomer from './CreateCustomer';
 import CreateSalesPerson from './CreateSalesPerson';
 import SalesRecordListAll from './SalesRecordList';
+import CreateSalesRecord from './CreateSalesRecord';
 function App(props) {
   // if (props.manufacturers !== undefined) {
   //   return null;
@@ -29,6 +30,7 @@ function App(props) {
           <Route path="/customers/create" element={<CreateCustomer />} />
           <Route path="/salesperson/create" element={<CreateSalesPerson />} />
           <Route path="/salesrecord" element={<SalesRecordListAll />} />
+          <Route path="/salesrecord/create" element={<CreateSalesRecord />} />
         </Routes>
       </div>
     </BrowserRouter>
