@@ -7,6 +7,8 @@ class AppointmentList extends React.Component {
         appointments: [],
     }
     this.getAppointments = this.getAppointments.bind(this);
+    this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.completeAppointment = this.completeAppointment.bind(this);
     }
     
     
@@ -38,6 +40,14 @@ class AppointmentList extends React.Component {
         this.setState({appointments: updated_appts})
     }
 
+    async completeAppointment(appt) {
+        await fetch(`http://localhost:8080/api/appointments/${appt.id}/`, { method: "PUT" });
+        let index = this.state.appointments.indexOf(appt);
+        let updated_appts = [...this.state.appointments];
+        updated_appts.splice(index,1)
+        this.setState({appointments: updated_appts})
+    }
+
     render () {
         return (
             <table className="table table-striped table-hover table-bordered">
@@ -50,6 +60,7 @@ class AppointmentList extends React.Component {
                 <th>Technician</th>
                 <th>Reason</th>
                 <th>VIP</th>
+                <th>Options</th>
             </tr>
             </thead>
             <tbody>
@@ -64,7 +75,9 @@ class AppointmentList extends React.Component {
                 <td>{appt.reason}</td>
                 {appt.vip && <td>YES</td>}
                 {!appt.vip && <td>NO</td>}
-                <td><button onClick={() => this.deleteAppointment(appt)}>Delete</button></td>
+                <td><button className="btn btn-danger" onClick={() => this.deleteAppointment(appt)}>Cancel</button>
+                <button className="btn btn-success" onClick={() => this.completeAppointment(appt)}>Finished</button>
+                </td>
                 </tr>
             )
             })}

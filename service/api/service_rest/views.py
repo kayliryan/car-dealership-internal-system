@@ -23,6 +23,7 @@ class AppointmentEncoder(ModelEncoder):
         "time",
         "reason",
         "id",
+        "completed",
     ]
     def get_extra_data(self, o):
         return {
@@ -61,7 +62,7 @@ def api_list_appointments(request, automobile_vo_vin=None):
             encoder = AppointmentEncoder,
             safe=False,
         )
-    else: # POST
+    elif request.method == "POST": # POST
         content = json.loads(request.body)
         try:
             content["technician"] = Technician.objects.get(id=content["technician"])
@@ -73,7 +74,6 @@ def api_list_appointments(request, automobile_vo_vin=None):
                 encoder=AppointmentEncoder,
                 safe=False,
             )
-
         except AutomobileVO.DoesNotExist:
             autocontent = {}
             autocontent["vin"] = content["vin"]
@@ -90,6 +90,7 @@ def api_list_appointments(request, automobile_vo_vin=None):
                 safe=False,
             )
 
+
 @require_http_methods(["GET"])
 def api_show_appointment(request, vin):
     if request.method == "GET":
@@ -101,8 +102,16 @@ def api_show_appointment(request, vin):
             safe=False,
         )
 
-@require_http_methods(["DELETE"])
-def api_delete_appointment(request, pk):
+@require_http_methods(["DELETE", "PUT"])
+def api_alter_appointment(request, pk):
     if request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
+    else: #PUT
+        Appointment.objects.filter(id=pk).update(completed=True)
+        appt = Appointment.objects.get(id=pk)
+        return JsonResponse(
+            appt,
+            encoder=AppointmentEncoder,
+            safe=False,
+        )

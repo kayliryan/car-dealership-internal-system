@@ -29,3 +29,4 @@ class Appointment(models.Model):
         on_delete=models.CASCADE,
     )
     reason = models.CharField(max_length=200)
+    completed = models.BooleanField(default=False)
