@@ -32,31 +32,33 @@ class SalesRecordListAll extends React.Component {
   
     render () {
       return (
-        <table className="table table-striped table-hover table-bordered">
-        <caption>Sales Records</caption>
-        <thead className="table-dark">
-          <tr>
-            <th>Salesperson</th>
-            <th>Employee ID</th>
-            <th>Customer</th>
-            <th>VIN</th>
-            <th>Sale Price</th>
-          </tr>
-        </thead>
-        <tbody>
-         {this.state.salerecord.map(sale => {
-          return (
-            <tr key={sale.id}>
-              <td>{sale.saleperson.name}</td>
-              <td>{sale.saleperson.number}</td>
-              <td>{sale.customer.name}</td> 
-              <td>{sale.automobile.vin}</td>
-              <td>{sale.price}</td>
+        <>
+          <table className="table table-striped table-hover table-bordered">
+          <caption>Sales Records</caption>
+          <thead className="table-dark">
+            <tr>
+              <th>Salesperson</th>
+              <th>Employee ID</th>
+              <th>Customer</th>
+              <th>VIN</th>
+              <th>Sale Price</th>
             </tr>
-          )
-         })}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          {this.state.salerecord.map(sale => {
+            return (
+              <tr key={sale.id}>
+                <td>{sale.saleperson.name}</td>
+                <td>{sale.saleperson.number}</td>
+                <td>{sale.customer.name}</td> 
+                <td>{sale.automobile.vin}</td>
+                <td>{sale.price}</td>
+              </tr>
+            )
+          })}
+          </tbody>
+        </table>
+      </>
       )
     }
   }

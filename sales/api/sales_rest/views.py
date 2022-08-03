@@ -100,7 +100,7 @@ def api_list_sales_record(request, salesperson_vo_id=None):
             {"salesrecord": salesrecord},
             encoder = SalesRecordEncoder
         )
-    else: #POST create sales record
+    elif request.method=="POST": #POST create sales record
         content = json.loads(request.body)
         print(content)
         try:
@@ -131,3 +131,15 @@ def api_list_sales_record(request, salesperson_vo_id=None):
                 {"message": "Invaid automobile id"},
                 status=400.
             )
+    # else:
+    #     try:
+    #         salesrecord = SalesRecord.objects.get(id=salesperson_vo_id)
+    #         print(salesrecord)
+    #         salesrecord.delete()
+    #         return JsonResponse(
+    #             SalesRecord,
+    #             encoder = SalesRecordEncoder,
+    #             safe=False,
+    #         )
+    #     except SalesRecord.DoesNotExist:
+    #         return JsonResponse({"message": "No Sales Record"})
