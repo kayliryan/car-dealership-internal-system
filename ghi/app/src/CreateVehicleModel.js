@@ -13,22 +13,18 @@ class CreateVehicleModel extends React.Component {
         this.handleManufacturerChange = this.handleManufacturerChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
     handleName(event) {
         const value = event.target.value;
         this.setState({name:value});
     }
-
     handlePictureURL(event) {
         const value = event.target.value;
-        this.setState({picture_url: value});
+        this.setState({pictureUrl: value});
     }
-
     handleManufacturerChange(event) {
         const value = event.target.value;
         this.setState({manufacturerId: value});
     }
-
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
@@ -37,16 +33,16 @@ class CreateVehicleModel extends React.Component {
         delete data.pictureUrl
         delete data.manufacturerId
         delete data.manufacturers
-
-        const modelUrl =  'http://localhost:8100/api/models/'
+        const modelUrl =  `http://localhost:8100/api/models/`
         const fetchConfig = {
-            method: "post",
+            method: 'post',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             },
         };
         const response = await fetch(modelUrl, fetchConfig);
+        console.log(response)
         if (response.ok) {
             const cleared = {
                 name: '',
@@ -55,9 +51,7 @@ class CreateVehicleModel extends React.Component {
             }
             this.setState(cleared)
         }
-
     }
-
     async componentDidMount() {
         const url = 'http://localhost:8100/api/manufacturers/'
         const response = await fetch(url);
@@ -74,19 +68,19 @@ class CreateVehicleModel extends React.Component {
                         <h1>Create a Vehicle Model </h1>
                         <form onSubmit={this.handleSubmit} id="create-vehicle-form">
                             <div className="form-floating mb-3">
-                                <input placeholder="Name" onChange={this.handleName} required type="text" id="name" name="vehicle_name" className="form-control"/>
+                                <input placeholder="Name" onChange={this.handleName} value={this.state.name} required type="text" id="name" name="vehicle_name" className="form-control"/>
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input placeholder="picture_url" onChange={this.handlePictureURL} type="text" name="picture_url" id="picture_url" className="form-control"/>
+                                <input placeholder="picture_url" onChange={this.handlePictureURL} value = {this.state.picture_url} type="text" name="picture_url" id="picture_url" className="form-control"/>
                                 <label htmlFor="picture_url">Picture URL</label>
                             </div>
                             <div className="mb-3">
-                                <select required onChange={this.handleManufacturerChange} id="conference" name="conference" className="form-select">
+                                <select required onChange={this.handleManufacturerChange} value={this.state.manufacturer} id="manufacturer" name="manufacturer" className="form-select">
                                 <option value="">Choose a manufacturer</option>
                                 {this.state.manufacturers.map(manufacturer => {
                                     return(
-                                        <option key={manufacturer.id} value ={manufacturer.name}>
+                                        <option key={manufacturer.id} value ={manufacturer.id}>
                                             {manufacturer.name}
                                         </option>
                                     )
@@ -101,5 +95,4 @@ class CreateVehicleModel extends React.Component {
         )
     }
 }
-
 export default CreateVehicleModel
