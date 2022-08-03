@@ -88,4 +88,18 @@ def api_list_appointments(request, automobile_vo_vin=None):
                 encoder=AppointmentEncoder,
                 safe=False,
             )
-        
+
+@require_http_methods(["DELETE", "GET"])
+def api_show_appointment(request, vin):
+    if request.method == "DELETE":
+        auto = AutomobileVO.objects.get(vin=vin)
+        count, _ = Appointment.objects.filter(vin=vin).delete()
+        return JsonResponse({"deleted": count > 0})
+    else: #GET DETAILS
+        automobile = AutomobileVO.objects.get(vin=vin)
+        appointments = Appointment.objects.filter(automobile=automobile)
+        return JsonResponse(
+            {"appointments": appointments},
+            encoder = AppointmentEncoder,
+            safe=False,
+        )
