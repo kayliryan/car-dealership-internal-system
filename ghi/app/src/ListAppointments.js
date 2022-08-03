@@ -18,7 +18,7 @@ class AppointmentList extends React.Component {
         const response = await fetch(apptUrl);
         if (response.ok) {
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         this.setState({
             appointments: data.appointments,
         })
@@ -50,6 +50,8 @@ class AppointmentList extends React.Component {
 
     render () {
         return (
+            <React.Fragment>
+            <p className="h1 mt-3 mb-3">Service Appointments</p>
             <table className="table table-striped table-hover table-bordered">
             <thead className="table-dark">
             <tr>
@@ -83,6 +85,7 @@ class AppointmentList extends React.Component {
             })}
             </tbody>
         </table>
+        </React.Fragment>
         )
         }
     }
