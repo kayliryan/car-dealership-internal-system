@@ -12,7 +12,7 @@ Explain project
 This program is ran using Docker and React. Unpack the zip file into a directory named project-beta. Start in this high level directory and run the following commands in your terminal:  "docker-compose build" to build the images and "docker-compose up" to start your containers. Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
 
 ## Design
-
+<img src="https://gitlab.com/kayliryan/project-beta/-/blob/main/Resources/layout1.png">
 
 ## Service microservice
 My entities are Appointments and Technicians while Automobile is my Value Object, getting its information through a poller from the Inventory microservice.
