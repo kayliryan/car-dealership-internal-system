@@ -10,11 +10,11 @@ CarCar is an automobile inventory and servicing management system. It assists in
 
 ## Steps to follow
 This program is ran using Docker and React. 
-1. Unpack the zip file 
-2. In terminal navigate to your unzipped file and run the following commands:  
+-  Unpack the zip file 
+- In terminal navigate to your unzipped file and run the following commands:  
     - "docker-compose build" to build the images
     - "docker-compose up" to start your containers
-3. Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
+-  Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
 
 ## Design
 ![CarCar napkin](Resources/layout1.png)*Layout*
