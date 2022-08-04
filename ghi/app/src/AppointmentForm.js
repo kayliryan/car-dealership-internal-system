@@ -43,7 +43,6 @@ class AppointmentForm extends React.Component {
                 owner: "",
                 date: "",
                 time: "",
-                technicians: [],
                 reason: "",
             }
             this.setState(cleared);
