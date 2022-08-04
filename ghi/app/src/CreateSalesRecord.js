@@ -82,12 +82,15 @@ class CreateSalesRecord extends React.Component{
         const autoresponse = await fetch (autoUrl)
         if (autoresponse.ok){
             let autodata = await autoresponse.json()
+            let filteredData = {}
+            let filteredArray = []
             for(let i=0; i <(autodata.autos).length; i+=1){
-                if(autodata.autos[i].sold===true){
-                    let removed = autodata.autos.splice(i,1)
+                if(autodata.autos[i].sold===false){
+                    filteredArray.push(autodata.autos[i])
                 }
             }
-                this.setState({autos: autodata.autos})
+                filteredData["autos"] = filteredArray
+                this.setState({autos: filteredData.autos})
         }
         const custUrl = 'http://localhost:8090/api/customers/'
         const custresponse = await fetch(custUrl)
