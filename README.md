@@ -4,7 +4,11 @@ Team:
 
 * Kayli Ryan - Services
 * Jonathan Chen - Sales
+## Overview of Project
+Explain project
 
+## Steps to follow
+Instructions to get started from zip file. How to access react website
 ## Design
 This program is ran using Docker and React. Start in the high level directory of project beta and then run the commands following commands in your terminal:  "docker-compose build" to build the images and "docker-compose up" to start your containers.
 
