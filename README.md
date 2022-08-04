@@ -44,9 +44,10 @@ There are only 2 things that I want to poll for with the AutomobileVO. I only wa
 
 #### Salesrecord
 The salesrecord model contains 4 fields:
-1.) Saleperson - ForeignKey
-2.) Customer - ForeignKey
-3.) Automobile - ForeignKey
-4.) Price
+
+1. Saleperson - ForeignKey
+2. Customer - ForeignKey
+3. Automobile - ForeignKey
+4. Price
 
 When creating a salesrecord the Inventory-APi has to know when a car has been sold so that it can mark the vehicle as being sold to prevent a double-sell. To do this I have the salesrecord updating the boolean sold field to equal True and to save to the AutomobileVO the same thing. Because originally the poller only pinged the inventory-api every 60 seconds for changes, I had to update the sleep time to be lower in case a multiple users was entering sales and accidentally tried to sell the same vehicle twice before the AutomobileVO was updated in the inventory.
