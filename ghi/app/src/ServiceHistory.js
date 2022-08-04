@@ -32,12 +32,18 @@ class ServiceHistory extends React.Component {
                     let errorTag = document.getElementById('error-message')
                     errorTag.classList.add('d-none');
                     let data = await response.json()
-                    for(let i=0; i <(data.appointments).length; i+=1){
-                        if(data.appointments[i].completed===false){
-                            let removed = data.appointments.splice(i,1)
+                    let filteredData = {}
+                    let filteredArray = []
+                    let dataLength = (data.appointments).length
+                    for (let appointments in data) {
+                        for(let i=0; i <dataLength; i+=1){
+                            if(data.appointments[i]["completed"]===true){
+                                filteredArray.push(data.appointments[i])
+                            }
                         }
                     }
-                        this.setState({appointments: data.appointments})
+                filteredData["appointments"] = filteredArray
+                this.setState({appointments: filteredData.appointments})
                 }
                 else {
                     this.sendWarning()
