@@ -5,11 +5,16 @@ Team:
 * Jonathan Chen - Sales
 
 ## Overview of Project
-Explain project
+CarCar is an automobile inventory and servicing management system. It assists in maintaining a clear database of employees, customers, service appoints, and automobiles within the users dealership.
 
 
 ## Steps to follow
-This program is ran using Docker and React. Unpack the zip file into a directory named project-beta. Start in this high level directory and run the following commands in your terminal:  "docker-compose build" to build the images and "docker-compose up" to start your containers. Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
+This program is ran using Docker and React. 
+1. Unpack the zip file 
+2. In terminal navigate to your unzipped file and run the following commands:  
+    - "docker-compose build" to build the images
+    - "docker-compose up" to start your containers
+3. Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
 
 ## Design
 ![CarCar napkin](Resources/layout1.png)*Layout*
