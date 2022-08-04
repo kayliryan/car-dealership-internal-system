@@ -23,7 +23,6 @@ class AppointmentList extends React.Component {
                 let dataLength = (data.appointments).length
                 for (let appointments in data) {
                     for(let i=0; i <dataLength; i+=1){
-                        console.log(data[appointments])
                         if(data.appointments[i]["completed"]===false){
                             filteredArray.push(data.appointments[i])
                         }
