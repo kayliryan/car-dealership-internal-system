@@ -43,6 +43,7 @@ class CreateSalesRecord extends React.Component{
         delete data.autos
         delete data.salepersons
         delete data.customers
+        console.log(data)
         const url =  `http://localhost:8090/api/salesrecord/new/`
         const fetchConfig = {
             method: "post",
@@ -68,7 +69,7 @@ class CreateSalesRecord extends React.Component{
         if (response.ok) {
             const cleared = {
                 salespersons: '',
-                customer: '',
+                customer: [],
                 automobile: '',
                 price: ''
             }
