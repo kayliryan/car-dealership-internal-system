@@ -12,7 +12,7 @@ Explain project
 This program is ran using Docker and React. Unpack the zip file into a directory named project-beta. Start in this high level directory and run the following commands in your terminal:  "docker-compose build" to build the images and "docker-compose up" to start your containers. Once all 7 containers are running, React can be accessed through your browser at http://localhost:3000/
 
 ## Design
-
+![CarCar napkin](Resources/layout1.png)*Layout*
 
 ## Service microservice
 My entities are Appointments and Technicians while Automobile is my Value Object, getting its information through a poller from the Inventory microservice.
@@ -32,8 +32,16 @@ From looking at the requirements and looking at the design layout that we create
 The customer model has a one to many relationship to the Salesperson model beause 1 person can buy cars from many different salespersons. Outside of that relationship, the customer model is rather self-contained just holding the customer's Name, Address, and Phone number
 
 #### Salesperson
-The salesperson in my design would be considered the aggregate root pulling in information from all of the other models. The salesperson has a many-to-many relationship with the salesrecord model because multiple salespersons can have multiple sales with a record attached. 
-
-#### Salesrecord
+The salesperson has a many-to-many relationship with the salesrecord model because multiple salespersons can have multiple sales with a record attached. It can be argued that the salesperson should be the aggregate root however it made more sense for salesrecords to be the aggregate root as it combined all of the information from all the other API's. 
 
 #### AutomobileVO
+There are only 2 things that I want to poll for with the AutomobileVO. I only want the sold status of the vehicle in the inventory and the VIN(unique identifier) of the vehicle. So when creating a salesrecord it will check to see if the car(identified by the VIN) has been sold or not.
+
+#### Salesrecord
+The salesrecord model contains 4 fields:
+1.) Saleperson - ForeignKey
+2.) Customer - ForeignKey
+3.) Automobile - ForeignKey
+4.) Price
+
+When creating a salesrecord the Inventory-APi has to know when a car has been sold so that it can mark the vehicle as being sold to prevent a double-sell. To do this I have the salesrecord updating the boolean sold field to equal True and to save to the AutomobileVO the same thing. Because originally the poller only pinged the inventory-api every 60 seconds for changes, I had to update the sleep time to be lower in case a multiple users was entering sales and accidentally tried to sell the same vehicle twice before the AutomobileVO was updated in the inventory.
