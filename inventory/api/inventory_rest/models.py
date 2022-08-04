@@ -28,6 +28,7 @@ class Automobile(models.Model):
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
+    vip = models.BooleanField(default=True)
 
     model = models.ForeignKey(
         VehicleModel,

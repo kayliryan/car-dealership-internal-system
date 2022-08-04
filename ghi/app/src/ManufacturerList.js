@@ -14,7 +14,7 @@ class ManufacturerList extends React.Component {
         const response = await fetch('http://localhost:8100/api/manufacturers/');
         if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         this.setState({manufacturers: data.manufacturers});
         }
     }
@@ -31,6 +31,7 @@ class ManufacturerList extends React.Component {
 
         return (
         <React.Fragment>
+        <p className="h1 mt-3 mb-3">Vehicle Models</p>
         <div className="container-fluid">
         </div>
         <table className="table table-striped">

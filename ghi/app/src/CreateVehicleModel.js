@@ -13,22 +13,18 @@ class CreateVehicleModel extends React.Component {
         this.handleManufacturerChange = this.handleManufacturerChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
     handleName(event) {
         const value = event.target.value;
         this.setState({name:value});
     }
-
     handlePictureURL(event) {
         const value = event.target.value;
         this.setState({pictureUrl: value});
     }
-
     handleManufacturerChange(event) {
         const value = event.target.value;
         this.setState({manufacturerId: value});
     }
-
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
@@ -37,7 +33,6 @@ class CreateVehicleModel extends React.Component {
         delete data.pictureUrl
         delete data.manufacturerId
         delete data.manufacturers
-
         const modelUrl =  `http://localhost:8100/api/models/`
         const fetchConfig = {
             method: 'post',
@@ -47,7 +42,6 @@ class CreateVehicleModel extends React.Component {
             },
         };
         const response = await fetch(modelUrl, fetchConfig);
-        console.log(response)
         if (response.ok) {
             const cleared = {
                 name: '',
@@ -56,9 +50,7 @@ class CreateVehicleModel extends React.Component {
             }
             this.setState(cleared)
         }
-
     }
-
     async componentDidMount() {
         const url = 'http://localhost:8100/api/manufacturers/'
         const response = await fetch(url);
@@ -102,5 +94,4 @@ class CreateVehicleModel extends React.Component {
         )
     }
 }
-
 export default CreateVehicleModel

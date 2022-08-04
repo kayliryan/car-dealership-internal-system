@@ -12,10 +12,12 @@ import CreateSalesPerson from './CreateSalesPerson';
 import SalesRecordListAll from './SalesRecordList';
 import CreateSalesRecord from './CreateSalesRecord';
 import SalespersonHistory from './SalespersonHistory';
+import TechnicianForm from './TechnicianForm';
+import AppointmentList from './ListAppointments';
+import ServiceHistory from './ServiceHistory';
+import AppointmentForm from './AppointmentForm';
+
 function App(props) {
-  // if (props.manufacturers !== undefined) {
-  //   return null;
-  // }
   return (
     <BrowserRouter>
       <Nav />
@@ -33,6 +35,10 @@ function App(props) {
           <Route path="/salesrecord" element={<SalesRecordListAll />} />
           <Route path="/salesrecord/create" element={<CreateSalesRecord />} />
           <Route path="/salesrecord/history" element={<SalespersonHistory />} />
+          <Route path="/technicians/create" element={<TechnicianForm />} />
+          <Route path="/appointments/" element={<AppointmentList />} />
+          <Route path="/appointments/create/" element={<AppointmentForm />} />
+          <Route path="/appointments/history/" element={<ServiceHistory />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -31,8 +31,9 @@ class ListAutomobiles extends React.Component {
   
     render () {
       return (
+        <React.Fragment>
+        <p className="h1 mt-3 mb-3">Automobiles</p>
         <table className="table table-striped table-hover table-bordered">
-        <caption>Vehicle Models</caption>
         <thead className="table-dark">
           <tr>
             <th>VIN</th>
@@ -43,19 +44,20 @@ class ListAutomobiles extends React.Component {
           </tr>
         </thead>
         <tbody>
-         {this.state.automobiles.map(auto => {
-          return (
-            <tr key={auto.id}>
-              <td>{auto.vin}</td>
-              <td>{auto.color}</td>
-              <td>{auto.year}</td> 
-              <td>{auto.model.name}</td>
-              <td>{auto.model.manufacturer.name}</td>
-            </tr>
-          )
-         })}
+          {this.state.automobiles.map(auto => {
+            return (
+              <tr key={auto.id}>
+                <td>{auto.vin}</td>
+                <td>{auto.color}</td>
+                <td>{auto.year}</td> 
+                <td>{auto.model.name}</td>
+                <td>{auto.model.manufacturer.name}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
+      </React.Fragment>
       )
     }
   }
