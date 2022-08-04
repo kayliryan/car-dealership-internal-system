@@ -13,19 +13,28 @@ class AppointmentList extends React.Component {
     
     
     async getAppointments() {
-    const apptUrl = 'http://localhost:8080/api/appointments/';
-    try {
-        const response = await fetch(apptUrl);
-        if (response.ok) {
-        const data = await response.json()
-        // console.log(data)
-        this.setState({
-            appointments: data.appointments,
-        })
+        const apptUrl = 'http://localhost:8080/api/appointments/';
+        try {
+            const response = await fetch(apptUrl);
+            if (response.ok) {
+                const data = await response.json()
+                let filteredData = {}
+                let filteredArray = []
+                let dataLength = (data.appointments).length
+                for (let appointments in data) {
+                    for(let i=0; i <dataLength; i+=1){
+                        console.log(data[appointments])
+                        if(data.appointments[i]["completed"]===false){
+                            filteredArray.push(data.appointments[i])
+                        }
+                    }
+                }
+            filteredData["appointments"] = filteredArray
+            this.setState({appointments: filteredData.appointments})
         };
-    } catch (e) {
-        console.error(e);
-    }
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     async componentDidMount() {
