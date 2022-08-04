@@ -19,7 +19,7 @@ class ServiceHistory extends React.Component {
         }
     
     async getHistory() {
-        if (this.state.vin == "") {
+        if (this.state.vin === "") {
             this.setState({
                 appointments: [],
             })

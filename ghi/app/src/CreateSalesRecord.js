@@ -68,7 +68,7 @@ class CreateSalesRecord extends React.Component{
         if (response.ok) {
             const cleared = {
                 salespersons: '',
-                customers: '',
+                customer: '',
                 automobile: '',
                 price: ''
             }
