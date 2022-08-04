@@ -25,6 +25,15 @@ The Service Microservice uses a poller to  create AutomobileVO's for every car t
 In React we have pages to see a list of all upcoming service appointments, as well as a page called Service History where you can look up a VIN number to see all past service appointments. The "completed" attribute on the Appointment model is what allows this to happen in the backend. All freshly created appointments have an attribute "completed=False". Our Service Appointments page therefore only shows the appointments that have not been completed. The moment the user clicks the "Finished" button on the List Appointments page our microservice marks "completed=True", and removes this appointment from the list. The Service History page is where all "completed=True" appointments live, ready to be shown once the corresponding VIN is typed into the search bar. 
 
 ## Sales microservice
+### Modeling
+From looking at the requirements and looking at the design layout that we created it was clear that Customer, Salesperson, Salesrecord, and AutomobileVO would have to be modeled. 
 
-Explain your models and integration with the inventory
-microservice, here.
+#### Customer Model
+The customer model has a one to many relationship to the Salesperson model beause 1 person can buy cars from many different salespersons. Outside of that relationship, the customer model is rather self-contained just holding the customer's Name, Address, and Phone number
+
+#### Salesperson
+The salesperson in my design would be considered the aggregate root pulling in information from all of the other models. The salesperson has a many-to-many relationship with the salesrecord model because multiple salespersons can have multiple sales with a record attached. 
+
+#### Salesrecord
+
+#### AutomobileVO
