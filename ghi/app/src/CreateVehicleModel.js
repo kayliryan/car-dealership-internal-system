@@ -42,7 +42,7 @@ class CreateVehicleModel extends React.Component {
             },
         };
         const response = await fetch(modelUrl, fetchConfig);
-        console.log(response)
+        // console.log(response)
         if (response.ok) {
             const cleared = {
                 name: '',

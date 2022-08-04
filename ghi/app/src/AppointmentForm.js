@@ -25,7 +25,7 @@ class AppointmentForm extends React.Component {
         event.preventDefault();
         const data = {...this.state};
         delete data.technicians;
-        console.log(data);
+        // console.log(data);
         
         let url = `http://localhost:8080/api/appointments/`;
         let fetchConfig = {
